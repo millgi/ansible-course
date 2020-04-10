@@ -1,6 +1,0 @@
----
-all:
-  hosts:
-    unbunt:
-      ansible_host: 192.168.33.10
-      ansible_private_key: .vagrant/machines/default/virtualbox/private_key

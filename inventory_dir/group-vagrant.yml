@@ -1,0 +1,12 @@
+all:
+  hosts:
+    ubuntu:
+      ansible_host: 192.168.33.10
+      ansible_private_key_file: .vagrant/machines/default/virtualbox/private_key
+  children:
+    vagrant:
+      hosts:
+        ubuntu
+      vars:
+        ansible_user: vagrant
+        ansible_port: 22

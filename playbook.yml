@@ -1,0 +1,6 @@
+---
+- name: Ensure git installed
+  hosts: vagrant
+  tasks:
+    - package: name=git state=latest
+      become: yes
