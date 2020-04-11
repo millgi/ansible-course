@@ -1,6 +1,18 @@
 ---
-- name: Ensure git installed
+
+- name: Tomcat installation
   hosts: vagrant
+  vars:
+    tomcat_version: 9.0.34
   tasks:
-    - package: name=git state=latest
-      become: yes
+    - maven_artifact:
+        group_id: org.apache.tomcat
+        artifact_id: tomcat
+        version: "{{ tomcat_version }}"
+        extension: zip
+        dest: "tomcat-{{ tomcat_version }}.zip"
+        repository_url: https://repo1.maven.org/maven2/
+    - file: path=temp state=directory
+    - unarchive: src="tomcat-{{ tomcat_version }}.zip" dest=temp/ remote_src=yes
+    - file: path=tomcat state=directory
+    - command: "rsync -r --delete temp/apache-tomcat-{{ tomcat_version }}/ tomcat"
